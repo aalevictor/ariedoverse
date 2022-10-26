@@ -6,6 +6,9 @@ import { Header } from './components/Header'
 import { useEffect, useMemo, useState } from 'react'
 import { TextInput } from './components/TextInput'
 import DataTable from 'react-data-table-component';
+import { Select } from './components/Select'
+
+import * as SelectR from '@radix-ui/react-select';
 
 const paginationComponentOptions = { 
 	rowsPerPageText: 'Registros por página:', 
@@ -117,11 +120,17 @@ function App() {
 	const [filterClub, setFilterClub] = useState('')
 	const [filterNationality, setFilterNationality] = useState('')
 	const [resetPaginationToggle, ] = useState(false)
+	const [nationalities, setNationalities] = useState([])
   
 	useEffect(() => {
 		fetch('https://balp-api.herokuapp.com/bal/players')
 			.then(response => response.json())
-			.then(data => setPlayers(data))
+			.then(
+				data => {
+					setPlayers(data)
+					setNationalities([...new Set(data.map(item => item.nationality))])
+				}
+			)
 	}, [])
 	
 	const filteredItems = players.filter(item => item.name && item.name.toLowerCase().includes(filterName.toLowerCase()))
@@ -139,13 +148,19 @@ function App() {
 						<TextInput.Root>
 							<TextInput.Input onChange={e => setFilterClub(e.target.value)} placeholder='Clube' />
 						</TextInput.Root>
-						<TextInput.Root>
-							<TextInput.Input onChange={e => setFilterNationality(e.target.value)} placeholder='Nacionalidade' />
-						</TextInput.Root>
+						<Select placeholder='Nacionalidade' onValueChange={setFilterNationality}>
+							{nationalities.map(nationality => {
+								return (
+									<SelectR.Item className='rounded text-xs text-blue-2 outline-none p-2 cursor-pointer hover:bg-grey-1 hover:bg-opacity-25' value={nationality}>
+										<SelectR.ItemText>{nationality}</SelectR.ItemText>
+									</SelectR.Item>
+								)
+							})}
+						</Select>
 				</div>
 			</div>
 		);
-	}, []);
+	}, [ nationalities ]);
 
   	return (
 		<div className='bg-blue-4 h-full min-h-screen'>
@@ -176,8 +191,7 @@ function App() {
 					responsive
 					noDataComponent='Sem nenhum registro encontrado.'
 				/>
-			</div>
-			
+			</div>			
 		</div>
   	)
 }

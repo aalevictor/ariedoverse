@@ -6,7 +6,7 @@ import logo from '../assets/logo2.png';
 export function HeaderRoot({ children }) {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
     return (
-        <nav className="sticky flex flex-wrap items-center justify-between px-2 py-1 bg-blue-3 top-0 z-50">
+        <nav className="sticky flex flex-wrap items-center justify-between px-2 py-1 bg-blue-3 top-0 z-40">
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div className="w-full relative flex items-baseline justify-between lg:w-auto lg:static lg:block lg:justify-start py-4">
                 <a href="/" className='hover:opacity-80'>
