@@ -1,12 +1,14 @@
 import React from 'react';
-import Template from '../components/Template';
+import {Body} from '../components/Body';
+import Navbar from '../components/Navbar';
 import TwitchFrame from '../components/TwitchFrame';
 
 const Home = () =>{
   return (
-    <Template>
-      <TwitchFrame token='yhafdkd42458shmhehxj9gei4502lk' />
-    </Template>
+    <Body>
+        <Navbar />
+        <TwitchFrame userID='197696054' />
+    </Body>
   )
 }
 

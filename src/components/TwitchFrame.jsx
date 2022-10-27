@@ -1,10 +1,11 @@
-import { Slot } from "@radix-ui/react-slot";
 import { useEffect, useState } from "react";
-import { TwitchEmbed } from "react-twitch-embed";
-// import ariedo from '../assets/ariedo.png';
+import { TwitchChat, TwitchPlayer } from "react-twitch-embed";
 
-function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '466120052', token}) {
+function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '466120052'}) {
     const [live, setLive] = useState(false)
+    const [channel, setChannel] = useState('sirariedo')
+
+    const token = 'yhafdkd42458shmhehxj9gei4502lk'
 
     useEffect(() => {
         const URI = url + (userID !== '' ? `?user_id=${userID}` : '')
@@ -21,17 +22,28 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
             data => {
                 console.log(data)
                 setLive(data.data.length > 0)
+                data.data.length > 0 ? setChannel(data.data[0].user_name) : setChannel('sirariedo')
             }
         )
-    }, [ url, token, userID ])
+        
+        if (document.readyState === 'complete') {
+            console.log('entrou');
+            const offline = document.getElementsByClassName('offline-embeds');
+            console.log(offline)
+        }
+
+    }, [ url, userID ])
     
 
     return (
-        <Slot className="rounded-md w-fit overflow-clip mx-auto">
-            { !live ? (
-                <TwitchEmbed channel='sirariedo' />
+        <div className="flex flex-row max-lg:flex-col">
+            <div className="h-[550px] w-full max-lg:h-[250px]">
+                <TwitchPlayer className="" width='100%' height='100%' channel={channel} />
+            </div>
+            { live ? (
+                <TwitchChat className="max-lg:w-full h-[550px]" channel={channel} />
             ) : ('')}
-        </Slot>
+        </div>
     )
 }
 
