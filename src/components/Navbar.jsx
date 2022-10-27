@@ -15,7 +15,7 @@ function Navbar() {
 			</Header.Item>
 			<Header.Item>
 				<UserCircle size={20} />
-				<Text size='text-sm' className='text-offwhite font-semibold'>aalevictor</Text>
+				<Text size='text-sm' className='text-offwhite font-semibold'>Login</Text>
 			</Header.Item>
 		</Header.Root>	
   	)
