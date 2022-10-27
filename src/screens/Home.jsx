@@ -7,7 +7,7 @@ const Home = () =>{
   return (
     <Body>
         <Navbar />
-        <TwitchFrame userID='197696054' />
+        <TwitchFrame userID='466120052' />
     </Body>
   )
 }
