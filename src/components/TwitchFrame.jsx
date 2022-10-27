@@ -36,7 +36,7 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
     
 
     return (
-        <div className="flex flex-row max-lg:flex-col">
+        <div className="flex flex-row max-lg:flex-col mt-8">
             <div className="h-[550px] w-full max-lg:h-[250px]">
                 <TwitchPlayer className="" width='100%' height='100%' channel={channel} />
             </div>
