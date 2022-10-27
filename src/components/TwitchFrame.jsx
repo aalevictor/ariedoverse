@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { TwitchEmbed } from "react-twitch-embed";
 // import ariedo from '../assets/ariedo.png';
 
 function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '466120052', token}) {
@@ -27,11 +28,9 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
 
     return (
         <div className='max-w-[1024px] mx-auto py-8 px-2 max-lg:px-8 text-xl font-black text-offwhite'>
-            { live ? (
-                'Online'
-            ) : (
-                <iframe title="SirAriedo" src="https://player.twitch.tv/?channel=sirariedo&parent=ariedoverse.herokuapp.com" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-            )}
+            { !live ? (
+                <TwitchEmbed channel='sirariedo' />
+            ) : ('')}
 		</div>
     )
 }
