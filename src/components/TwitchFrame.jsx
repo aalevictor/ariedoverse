@@ -27,11 +27,11 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
     
 
     return (
-        <div className="rounded-md w-fit overflow-clip mx-auto">
-            { !live ? (
+        <Slot className="rounded-md w-fit overflow-clip mx-auto">
+            { live ? (
                 <TwitchEmbed channel='sirariedo' />
             ) : ('')}
-        </div>
+        </Slot>
     )
 }
 
