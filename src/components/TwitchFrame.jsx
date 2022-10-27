@@ -1,3 +1,4 @@
+import { Slot } from "@radix-ui/react-slot";
 import { useEffect, useState } from "react";
 import { TwitchEmbed } from "react-twitch-embed";
 // import ariedo from '../assets/ariedo.png';
@@ -7,7 +8,6 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
 
     useEffect(() => {
         const URI = url + (userID !== '' ? `?user_id=${userID}` : '')
-
         fetch(URI, {
             method: 'GET',
             headers: {
@@ -27,11 +27,11 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
     
 
     return (
-        <div className='max-w-[1024px] mx-auto py-8 px-2 max-lg:px-8 text-xl font-black text-offwhite'>
+        <div className="rounded-md w-fit overflow-clip mx-auto">
             { !live ? (
                 <TwitchEmbed channel='sirariedo' />
             ) : ('')}
-		</div>
+        </div>
     )
 }
 
