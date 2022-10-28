@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, redirect } from 'react-router-dom';
 import Template from '../../components/Template';
 import { Player } from '../../components/Player';
 
@@ -13,6 +13,7 @@ const Players = () =>{
 
     useEffect(() => {
         var url = `${baseURL}bal/players`
+
         if (searchParams.get('id')){
             
             url += searchParams.get('id') ? `/${searchParams.get('id')}` : ''
@@ -27,7 +28,11 @@ const Players = () =>{
             
             setFound(players.length > 0)
         }
-    }, [ searchParams, players ])
+        if (!found){
+            window.location.href = "/bal/players/list";
+        }
+    }, [ searchParams, players, found ])
+
     return (
         <Template>
             {players.map(player => {
