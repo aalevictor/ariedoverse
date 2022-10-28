@@ -1,11 +1,11 @@
-import { Text } from '../components/Text'
+import { Text } from '../../components/Text'
 import { useEffect, useMemo, useState } from 'react'
-import { TextInput } from '../components/TextInput'
+import { TextInput } from '../../components/TextInput'
 import DataTable from 'react-data-table-component';
-import { Select } from '../components/Select'
+import { Select } from '../../components/Select'
 
 import * as SelectR from '@radix-ui/react-select';
-import Template from '../components/Template';
+import Template from '../../components/Template';
 
 const paginationComponentOptions = { 
 	rowsPerPageText: 'Registros por página:', 
