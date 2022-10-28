@@ -41,8 +41,6 @@ const customStyles = {
 		highlightOnHoverStyle: {
 			color: '#263F78',
 			backgroundColor: '#FFF4D3',
-			transitionDuration: '0.75s',
-			transitionProperty: 'background-color',
 			fontWeight: 'bold'
 		},
     },

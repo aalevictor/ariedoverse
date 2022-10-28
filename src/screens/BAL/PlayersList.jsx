@@ -8,40 +8,10 @@ import * as SelectR from '@radix-ui/react-select';
 import Template from '../../components/Template';
 import Tables from '../../components/Tables';
 
-const columns = [
-    // {
-    //     name: 'ID Único',
-    //     selector: (row) => row.uniqueID,
-    //     sortable: true,
-    // },
-    {
-        name: 'Nacionalidade',
-        selector: (row) => row.nationality,
-        sortable: true,
-    },
-    {
-        name: 'Nome',
-        selector: (row) => <a href={`/bal/players?id=${row.uniqueID}`}>{row.name}</a>,
-        sortable: true,
-    },
-    {
-        name: 'Clube',
-        selector: (row) => row.club,
-        sortable: true,
-    },
-    {
-        name: 'Posição',
-        selector: (row) => row.position,
-    },
-    {
-        name: 'Idade',
-        selector: (row) => row.age,
-    },
-    {
-        name: 'Salário',
-        selector: (row) => row.wage,
-    },
-];
+function getWindowSize() {
+  const {innerWidth, innerHeight} = window;
+  return {innerWidth, innerHeight};
+}
 
 function PlayersList(props) {
 	const [players, setPlayers] = useState([])
@@ -50,6 +20,70 @@ function PlayersList(props) {
 	const [filterNationality, setFilterNationality] = useState('')
 	const [nationalities, setNationalities] = useState([])
 	const [searchParams, ] = useSearchParams();
+	const [omit1, setOmit1] = useState(false)
+	const [omit2, setOmit2] = useState(false)
+	const [omit3, setOmit3] = useState(false)
+	const [omit4, setOmit4] = useState(false)
+	// const [omit5, setOmit5] = useState(false)
+	const [windowSize, setWindowSize] = useState(getWindowSize());
+
+	useEffect(() => {
+		function handleWindowResize() {
+			setWindowSize(getWindowSize());
+		}
+
+		window.addEventListener('resize', handleWindowResize);
+
+		return () => {
+			window.removeEventListener('resize', handleWindowResize);
+		};
+	}, []);
+
+	useEffect(() => {
+		setOmit1(windowSize.innerWidth < 1024)
+		setOmit2(windowSize.innerWidth < 920)
+		setOmit3(windowSize.innerWidth < 800)
+		setOmit4(windowSize.innerWidth < 640)
+	}, [ windowSize ])
+
+	const columns = [
+		// {
+		//     name: 'ID Único',
+		//     selector: (row) => row.uniqueID,
+		//     sortable: true,
+		// },
+		{
+			name: 'Nacionalidade',
+			selector: (row) => row.nationality,
+			sortable: true,
+		},
+		{
+			name: 'Nome',
+			selector: (row) => <a href={`/bal/players?id=${row.uniqueID}`}>{row.name}</a>,
+			sortable: true,
+		},
+		{
+			name: 'Clube',
+			selector: (row) => row.club,
+			sortable: true,
+			omit: omit4,
+		},
+		{
+			name: 'Posição',
+			selector: (row) => row.position,
+			omit: omit3,
+		},
+		{
+			name: 'Idade',
+			selector: (row) => row.age,
+			omit: omit2,
+		},
+		{
+			name: 'Salário',
+			selector: (row) => row.wage,
+			omit: omit1,
+		},
+	];
 
 	const baseURL = 'https://balp-api.herokuapp.com/'
   

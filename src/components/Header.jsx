@@ -1,10 +1,10 @@
 // import logo from "../assets/logo2.png";
-import React from "react";
+import { useState } from "react";
 import { List } from 'phosphor-react';
 import logo from '../assets/logo2.png';
 
 export function HeaderRoot({ children }) {
-    const [navbarOpen, setNavbarOpen] = React.useState(false);
+    const [navbarOpen, setNavbarOpen] = useState(false);
     return (
         <nav className="sticky flex flex-wrap items-center justify-between px-2 py-1 bg-blue-3 top-0 z-40">
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
