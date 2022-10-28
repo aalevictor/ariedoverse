@@ -1,19 +1,12 @@
 import { Text } from '../../components/Text'
 import { useEffect, useMemo, useState } from 'react'
 import { TextInput } from '../../components/TextInput'
-import DataTable from 'react-data-table-component';
 import { Select } from '../../components/Select'
 import { useSearchParams } from "react-router-dom";
 
 import * as SelectR from '@radix-ui/react-select';
 import Template from '../../components/Template';
-
-const paginationComponentOptions = { 
-	rowsPerPageText: 'Registros por página:', 
-	rangeSeparatorText: 'de', 
-	noRowsPerPage: false, 
-	selectAllRowsItem: false, 
-	selectAllRowsItemText: 'Todos' }
+import Tables from '../../components/Tables';
 
 const columns = [
     {
@@ -45,79 +38,11 @@ const columns = [
     },
 ];
 
-const customStyles = {
-	table: {
-		style: {
-			fontFamily: 'Inter',
-			backgroundColor: 'transparent',
-		}
-	},
-	subHeader: {
-		style: {
-			backgroundColor: 'transparent',
-			paddingRight: 0,
-			paddingLeft: 0,
-		}
-	},
-	headRow: {
-		style: {
-			borderRadius: '4px',
-			backgroundColor: 'transparent',
-			color: '#FFF4D3',
-		}
-	},
-    rows: {
-        style: {
-			marginTop: '8px',
-			borderRadius: '4px',
-			backgroundColor: 'rgba(100, 114, 136, 0.4)',
-			color: '#FFF4D3',
-			padding: '4px',
-        },
-    },
-    headCells: {
-        style: {
-			fontSize: '14px',
-        },
-    },
-    cells: {
-        style: {
-            paddingLeft: '8px',
-            paddingRight: '8px',
-        },
-    },
-	pagination: {
-		style: {
-			borderRadius: '4px',
-			backgroundColor: 'transparent',
-			color: '#FFF4D3',
-			marginTop: '8px',
-		},
-		pageButtonsStyle: {
-			color: '#FFF4D3',
-			fill: '#FFF4D3',
-		}
-	},
-	noData: {
-		style: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			marginTop: '8px',
-			borderRadius: '4px',
-			backgroundColor: 'rgba(100, 114, 136, 0.4)',
-			color: '#FFF4D3',
-			padding: '24px',
-		},
-	}
-};
-
 function PlayersList(props) {
 	const [players, setPlayers] = useState([])
 	const [filterName, setFilterName] = useState('')
 	const [filterClub, setFilterClub] = useState('')
 	const [filterNationality, setFilterNationality] = useState('')
-	const [resetPaginationToggle, ] = useState(false)
 	const [nationalities, setNationalities] = useState([])
 	const [searchParams, ] = useSearchParams();
 
@@ -172,18 +97,7 @@ function PlayersList(props) {
 
   	return (
 		<Template>
-			<DataTable
-				columns={columns}
-				data={filteredItems}
-				subHeader
-				subHeaderComponent={subHeaderComponentMemo}
-				customStyles={customStyles}
-				pagination
-				paginationResetDefaultPage={resetPaginationToggle}
-				paginationComponentOptions={paginationComponentOptions}
-				responsive
-				noDataComponent='Sem nenhum registro encontrado.'
-			/>
+			<Tables columns={columns} data={filteredItems} subHeaderComponentMemo={subHeaderComponentMemo} />
 		</Template>
   	)
 }

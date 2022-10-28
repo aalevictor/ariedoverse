@@ -5,11 +5,11 @@ import { CaretDown, CaretUp, User } from 'phosphor-react';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 // const perks = [ 'C# DE NITRO', 'TROCA-TROCA', 'TRATAMENTO PRECOCE', 'CAI NUNCA', 'RATO DE ACADEMIA', 'DUAS SANFONADAS', 'DEIXA QUE EU COBRO', 'PITBULL', 'OPORTUNISTA', 'OLHA O LADRÃO', 'CABEÇA FRIA', 'CORAÇÃO QUENTE', 'NÃO VALE BOMBA', 'SÓ VALE DE LONGE', 'TIK-TOKA', 'COLA NO PÉ', 'DRIBLE DEVERIA VALER PA', 'PETER CROUCH DA SHOPEE', 'CUCABOL', 'COACHING QUÂNTICO', 'REI DO CHUTÃO', 'EDERSON DO ALIEXPRESS', 'COMO UM GATO', 'BEM POSICIONADO', 'MÃO FIRME', 'PONTOS ESCONDIDOS', 'CLUTCHZEIRO', 'INABALÁVEL', 'JOELHO DE AÇO', 'PONTOS LIVRES' ]
-const INITIAL = false
+const INITIAL = true
 
 export function PlayerRoot({ children }) {
     return (
-        <div className='h-fit relative p-2 py-4 mx-auto w-[90%] max-w-[1024px] flex flex-col gap-4 my-auto'>
+        <div className='h-fit relative p-2 py-4 mx-auto w-full flex flex-col gap-4 my-auto'>
             { children }
         </div>
     )
@@ -17,21 +17,25 @@ export function PlayerRoot({ children }) {
 
 PlayerRoot.displayName = 'Player.Root'
 
-export function PlayerContent({ children }) {
+export function PlayerContent({ player }) {
     return (
         <div className='grid grid-cols-5 gap-1 max-lg:flex max-lg:flex-col max-lg:gap-0'>
-            { children }
+            <PlayerExtras extras={player.extras} position={player.position} />
+            <PlayerMentals mentals={player.mentals} />
+            <PlayerPhysicals physicals={player.physicals} goalkeeper={player.extras} position={player.position} />
+            <PlayerHidden hidden={player.hidden} />
+            <PlayerOthers player={player} />
         </div>
     )
 }
 
 PlayerContent.displayName = 'Player.Content'
 
-export function PlayerHeader({ player, URI }) {
+export function PlayerHeader({ player, URI='' }) {
     const content = (
-        <div className='grid grid-rows-1 grid-cols-5 gap-16 max-lg:flex max-lg:flex-col max-lg:gap-1'>
-            <PlayerImage URI={URI} />
-            <div className='text-offwhite col-span-4 gap-1 flex-col flex'>
+        <div className='grid grid-cols-5 w-full max-lg:flex max-lg:flex-col gap-1'>
+            <PlayerImage URI={URI} className="col-span-1" />
+            <div className='text-offwhite col-span-4 gap-1 flex-col flex w-full'>
                 <div className='font-semibold text-lg px-3 max-lg:my-3 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto max-lg:text-center'>{player.name} ({player.age} anos)</div>
                 <div className='grid grid-rows-4 grid-cols-2 gap-1 max-lg:flex max-lg:flex-col max-lg:w-full'>
                     <PlayerAttribute value={player.birthDate} attrib='Nascimento' bg />
@@ -343,16 +347,22 @@ export function PlayerAttribute({ attrib='', value, bg=false, keep=false, color=
 
 PlayerAttribute.displayName = 'Player.Attribute'
 
-export function PlayerImage({ URI }) {
+export function PlayerImage({ URI, className }) {
     if (URI){
         return (
-            <div className='bg-grey-1 bg-opacity-40 rounded w-[200px] h-[200px] mx-auto'>
+            <div className={clsx(
+                'bg-grey-1 bg-opacity-40 rounded w-full h-fit mx-auto',
+                className
+            )}>
                 <img src={URI} className='w-[95%] mx-auto mt-[5%]' alt="" />
             </div>
         )
     } else {
         return (
-            <div className='bg-grey-1 bg-opacity-40 rounded w-[200px] h-fit mx-auto text-blue-3'>
+            <div className={clsx(
+                'bg-grey-1 bg-opacity-40 rounded w-full h-fit mx-auto text-blue-3',
+                className
+            )}>
                 <User size='100%' weight='fill' className='w-[95%] mx-auto mt-[5%]' />
             </div>
         )
@@ -373,15 +383,15 @@ PlayerExtras.displayName = 'Player.Extras'
 
 export const Player = {
     Root: PlayerRoot,
-    Content: PlayerContent,
-    Image: PlayerImage,
     Header: PlayerHeader,
+        Image: PlayerImage,
+    Content: PlayerContent,
+        Extras: PlayerExtras,
+            Technicals: PlayerTechnicals,
+            Goalkeeper: PlayerGoalkeeper,
+        Mentals: PlayerMentals,
+        Physicals: PlayerPhysicals,
+        Hidden: PlayerHidden,
+        Others: PlayerOthers,
     Attribute: PlayerAttribute,
-    Technicals: PlayerTechnicals,
-    Goalkeeper: PlayerGoalkeeper,
-    Extras: PlayerExtras,
-    Mentals: PlayerMentals,
-    Physicals: PlayerPhysicals,
-    Hidden: PlayerHidden,
-    Others: PlayerOthers,
 }
