@@ -11,7 +11,7 @@ const paginationComponentOptions = {
 const customStyles = {
 	table: {
 		style: {
-			fontFamily: 'Inter',
+			fontFamily: 'Inter, sans-serif',
 			backgroundColor: 'transparent',
 		}
 	},
