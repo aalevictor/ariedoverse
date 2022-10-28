@@ -1,11 +1,9 @@
 import React from "react";
-
-import Players from "./Players";
-
+import PlayersList from "./PlayersList";
 
 const Routes = [{
-    'element': <Players />,
-    'path': '/players'
+    'element': <PlayersList />,
+    'path': '/players/list'
 }]
 
 export { Routes }

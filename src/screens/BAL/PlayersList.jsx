@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { TextInput } from '../../components/TextInput'
 import DataTable from 'react-data-table-component';
 import { Select } from '../../components/Select'
+import { useSearchParams } from "react-router-dom";
 
 import * as SelectR from '@radix-ui/react-select';
 import Template from '../../components/Template';
@@ -111,16 +112,23 @@ const customStyles = {
 	}
 };
 
-function Players() {
+function PlayersList(props) {
 	const [players, setPlayers] = useState([])
 	const [filterName, setFilterName] = useState('')
 	const [filterClub, setFilterClub] = useState('')
 	const [filterNationality, setFilterNationality] = useState('')
 	const [resetPaginationToggle, ] = useState(false)
 	const [nationalities, setNationalities] = useState([])
+	const [searchParams, ] = useSearchParams();
+
+	const baseURL = 'https://balp-api.herokuapp.com/'
   
 	useEffect(() => {
-		fetch('https://balp-api.herokuapp.com/bal/players')
+		var url = `${baseURL}bal/players`
+
+		url += searchParams.get('id') ? `/${searchParams.get('id')}` : ''
+
+		fetch(url)
 			.then(response => response.json())
 			.then(
 				data => {
@@ -128,7 +136,7 @@ function Players() {
 					setNationalities([...new Set(data.map(item => item.nationality))].sort())
 				}
 			)
-	}, [])
+	}, [ searchParams ])
 	
 	const filteredItems = players.filter(item => item.name && item.name.toLowerCase().includes(filterName.toLowerCase()))
 	.filter(item => item.club && item.club.toLowerCase().includes(filterClub.toLowerCase()))
@@ -180,4 +188,4 @@ function Players() {
   	)
 }
 
-export default Players
+export default PlayersList

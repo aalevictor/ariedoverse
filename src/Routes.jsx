@@ -10,11 +10,9 @@ const Routes = () => {
         <BrowserRouter>
             <Routers>
                 <Route element={<Home />} exact path="/" />
-                {/* <Route element={<Players />} path="/bal/players" /> */}
                 {BAL.map(bal => {
-                    return <Route element={bal.element} path={`/bal${bal.path}`} />
+                    return <Route element={bal.element} exact path={`/bal${bal.path}`} />
                 })}
-                <Route element={<Home />} exact path="/" />
             </Routers>
         </BrowserRouter>
     )
