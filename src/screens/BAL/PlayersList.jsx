@@ -9,6 +9,11 @@ import Template from '../../components/Template';
 import Tables from '../../components/Tables';
 
 const columns = [
+    // {
+    //     name: 'ID Único',
+    //     selector: (row) => row.uniqueID,
+    //     sortable: true,
+    // },
     {
         name: 'Nacionalidade',
         selector: (row) => row.nationality,
@@ -16,7 +21,7 @@ const columns = [
     },
     {
         name: 'Nome',
-        selector: (row) => row.name,
+        selector: (row) => <a href={`/bal/players?id=${row.uniqueID}`}>{row.name}</a>,
         sortable: true,
     },
     {
@@ -97,7 +102,12 @@ function PlayersList(props) {
 
   	return (
 		<Template>
-			<Tables columns={columns} data={filteredItems} subHeaderComponentMemo={subHeaderComponentMemo} />
+			<Tables 
+				columns={columns} 
+				data={filteredItems} 
+				subHeaderComponentMemo={subHeaderComponentMemo}
+				onRowClicked={(row) => { window.location.href = `/bal/players?id=${row.uniqueID}` }}
+			/>
 		</Template>
   	)
 }

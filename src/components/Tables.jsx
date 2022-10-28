@@ -38,6 +38,13 @@ const customStyles = {
 			color: '#FFF4D3',
 			padding: '8px',
         },
+		highlightOnHoverStyle: {
+			color: '#263F78',
+			backgroundColor: '#FFF4D3',
+			transitionDuration: '0.75s',
+			transitionProperty: 'background-color',
+			fontWeight: 'bold'
+		},
     },
     headCells: {
         style: {
@@ -75,7 +82,7 @@ const customStyles = {
 	}
 };
 
-function Tables({ columns, data, subHeaderComponentMemo }) {
+function Tables({ columns, data, subHeaderComponentMemo, onRowClicked }) {
 	const [resetPaginationToggle, ] = useState(false)
 
   	return (
@@ -89,7 +96,11 @@ function Tables({ columns, data, subHeaderComponentMemo }) {
 			paginationResetDefaultPage={resetPaginationToggle}
 			paginationComponentOptions={paginationComponentOptions}
 			responsive
+			keyField='id'
+			onRowClicked={onRowClicked}
 			noDataComponent='Sem nenhum registro encontrado.'
+			highlightOnHover
+			pointerOnHover
 		/>
   	)
 }

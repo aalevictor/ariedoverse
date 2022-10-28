@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, redirect } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Template from '../../components/Template';
 import { Player } from '../../components/Player';
 
 const Players = () =>{
     
     const [players, setPlayers] = useState([])
-    const [found, setFound] = useState(false)
     const [searchParams, ] = useSearchParams();
 
     const baseURL = 'https://balp-api.herokuapp.com/'
@@ -25,13 +24,8 @@ const Players = () =>{
                     setPlayers(data)
                 }
             )
-            
-            setFound(players.length > 0)
         }
-        if (!found){
-            window.location.href = "/bal/players/list";
-        }
-    }, [ searchParams, players, found ])
+    }, [ searchParams, players ])
 
     return (
         <Template>
