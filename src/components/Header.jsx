@@ -37,17 +37,20 @@ export function HeaderRoot({ children }) {
 
 HeaderRoot.displayName = 'Header.Root'
 
-export function HeaderItem({ children, link='#' }) {
+export function HeaderItem({ children, link='#', title }) {
+    const Comp = link === '#' ? 'div' : 'a'
+    
     return (
-        <li className="nav-item">
-            <a
-                className="px-3 py-2 flex items-center font-bold leading-snug rounded uppercase text-offwhite hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none focus:ring-2 ring-offwhite"
+        <li className="nav-item cursor-pointer">
+            <Comp
+                className="justify-end px-2 py-2 flex items-center font-bold leading-snug rounded uppercase text-offwhite hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none focus:ring-2 ring-offwhite"
                 href={link}
+                title={title}
             >
-                <div className='gap-2 flex flex-row items-center h-full px-5'>
+                <div className='h-full px-2'>
                     { children }
                 </div>
-            </a>
+            </Comp>
         </li>
     )
 }

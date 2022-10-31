@@ -20,10 +20,10 @@ function PlayersList(props) {
 	const [filterNationality, setFilterNationality] = useState('')
 	const [nationalities, setNationalities] = useState([])
 	const [searchParams, ] = useSearchParams();
-	const [omit1, setOmit1] = useState(false)
-	const [omit2, setOmit2] = useState(false)
-	const [omit3, setOmit3] = useState(false)
-	const [omit4, setOmit4] = useState(false)
+	const [xlg, setXlg] = useState(false)
+	const [lg, setLg] = useState(false)
+	const [md, setMd] = useState(false)
+	const [sm, setSm] = useState(false)
 	// const [omit5, setOmit5] = useState(false)
 	const [windowSize, setWindowSize] = useState(getWindowSize());
 
@@ -40,10 +40,10 @@ function PlayersList(props) {
 	}, []);
 
 	useEffect(() => {
-		setOmit1(windowSize.innerWidth < 1024)
-		setOmit2(windowSize.innerWidth < 920)
-		setOmit3(windowSize.innerWidth < 800)
-		setOmit4(windowSize.innerWidth < 640)
+		setXlg(windowSize.innerWidth < 1024)
+		setLg(windowSize.innerWidth < 920)
+		setMd(windowSize.innerWidth < 800)
+		setSm(windowSize.innerWidth < 640)
 	}, [ windowSize ])
 
 	const columns = [
@@ -66,22 +66,22 @@ function PlayersList(props) {
 			name: 'Clube',
 			selector: (row) => row.club,
 			sortable: true,
-			omit: omit4,
+			omit: sm,
 		},
 		{
 			name: 'Posição',
 			selector: (row) => row.position,
-			omit: omit3,
+			omit: md,
 		},
 		{
 			name: 'Idade',
 			selector: (row) => row.age,
-			omit: omit2,
+			omit: lg,
 		},
 		{
 			name: 'Salário',
 			selector: (row) => row.wage,
-			omit: omit1,
+			omit: xlg,
 		},
 	];
 

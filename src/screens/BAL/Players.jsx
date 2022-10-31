@@ -25,7 +25,7 @@ const Players = () =>{
                 }
             )
         }
-    }, [ searchParams, players ])
+    }, [ searchParams ])
 
     return (
         <Template>
