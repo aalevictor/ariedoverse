@@ -7,7 +7,7 @@ const Template = (props) =>{
   return (
     <Body>
         <Navbar />
-        <Content>
+        <Content className={props.className}>
             {props.children}
         </Content>
     </Body>

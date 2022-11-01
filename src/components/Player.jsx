@@ -36,7 +36,7 @@ export function PlayerHeader({ player, URI='' }) {
         <div className='grid grid-cols-5 w-full max-lg:flex max-lg:flex-col gap-1'>
             <PlayerImage URI={URI} className="col-span-1" />
             <div className='text-offwhite col-span-4 gap-1 flex-col flex w-full'>
-                <div className='font-semibold text-lg px-3 max-lg:my-3 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto max-lg:text-center'>{player.name} ({player.age} anos)</div>
+                <div className='font-semibold text-lg px-3 max-lg:my-3  max-lg:w-full max-lg:mx-auto max-lg:text-center'>{player.name} ({player.age} anos)</div>
                 <div className='grid grid-rows-4 grid-cols-2 gap-1 max-lg:flex max-lg:flex-col max-lg:w-full'>
                     <PlayerAttribute value={player.birthDate} attrib='Nascimento' bg />
                     <PlayerAttribute value={player.contractEnd} attrib='Contrato' bg keep />
@@ -64,7 +64,7 @@ export function PlayerTechnicals({ technicals }) {
             'flex flex-col gap-1 w-full',
             open ? 'max-lg:mb-6' : 'max-lg:mb-0'
          )} open={open} onOpenChange={setOpen}>
-            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                 Técnicos
                 { open ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
             </Collapsible.Trigger>
@@ -100,7 +100,7 @@ export function PlayerGoalkeeper({ goalkeeper }) {
             'flex flex-col gap-1 w-full',
             open ? 'max-lg:mb-6' : 'max-lg:mb-0'
          )} open={open} onOpenChange={setOpen}>
-            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                 Goleiro
                 { open ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
             </Collapsible.Trigger>
@@ -135,7 +135,7 @@ export function PlayerMentals({ mentals }) {
             'flex flex-col gap-1 w-full',
             open ? 'max-lg:mb-6' : 'max-lg:mb-0'
          )} open={open} onOpenChange={setOpen}>
-            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                 Mentais
                 { open ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
             </Collapsible.Trigger>
@@ -174,7 +174,7 @@ export function PlayerPhysicals({ physicals, position, goalkeeper }) {
                 'flex flex-col gap-1 w-full mt-10',
                 openGK ? 'max-lg:mb-6 max-lg:mt-6' : 'max-lg:mb-0'
              )} open={openGK} onOpenChange={setOpenGK}>
-                <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+                <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                     Técnicos (GR)
                     { openGK ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
                 </Collapsible.Trigger>
@@ -190,7 +190,7 @@ export function PlayerPhysicals({ physicals, position, goalkeeper }) {
         <Collapsible.Root className={clsx(
             'flex flex-col gap-1 w-full',
         )} open={open} onOpenChange={setOpen}>
-            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                 Físicos
                 { open ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
             </Collapsible.Trigger>
@@ -221,7 +221,7 @@ export function PlayerHidden({ hidden }) {
             'flex flex-col gap-1 w-full',
             open ? 'max-lg:mb-6' : 'max-lg:mb-0'
          )} open={open} onOpenChange={setOpen}>
-            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+            <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                 Escondidos
                 { open ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
             </Collapsible.Trigger>
@@ -260,7 +260,7 @@ export function PlayerOthers({ player }) {
                 'flex flex-col gap-1 w-full',
                 open ? 'max-lg:mb-6' : 'max-lg:mb-0'
             )} open={open} onOpenChange={setOpen}>
-                <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+                <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                     Outros
                     { open ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
                 </Collapsible.Trigger>
@@ -273,7 +273,7 @@ export function PlayerOthers({ player }) {
                         'flex flex-col gap-[3px] w-full mt-[41px] max-lg:mt-6 ',
                         openPosition ? 'max-lg:mb-6' : 'max-lg:mb-[-3px]'
                     )} open={openPosition} onOpenChange={setOpenPosition}>
-                        <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+                        <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                             Posições
                             { openPosition ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
                         </Collapsible.Trigger>
@@ -285,7 +285,7 @@ export function PlayerOthers({ player }) {
                         'flex flex-col gap-[3px] w-full',
                         openPersonality ? 'max-lg:mb-6' : 'max-lg:mb-[-3px]'
                     )} open={openPersonality} onOpenChange={setOpenPersonality}>
-                        <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+                        <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                             Personalidade
                             { openPersonality ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
                         </Collapsible.Trigger>
@@ -297,7 +297,7 @@ export function PlayerOthers({ player }) {
                         'flex flex-col gap-[3px] w-full',
                         openDescription ? 'max-lg:mb-6' : 'max-lg:mb-[-3px]'
                     )} open={openDescription} onOpenChange={setOpenDescription}>
-                        <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
+                        <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1  max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>
                             Descrição
                             { openDescription ? <CaretUp size={20} weight='bold'/> : <CaretDown size={20} weight='bold'/> }
                         </Collapsible.Trigger>
@@ -332,7 +332,7 @@ export function PlayerAttribute({ attrib='', value, bg=false, keep=false, color=
     }
     return (
         <div className={clsx(
-            'px-3 py-2 text-xs text-offwhite justify-between flex whitespace-nowrap overflow-hidden text-ellipsis max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto',
+            'px-3 py-2 text-xs text-offwhite justify-between flex whitespace-nowrap overflow-hidden text-ellipsis max-lg:w-full max-lg:mx-auto',
             bg ? 'rounded bg-grey-1 bg-opacity-40' : 'rounded bg-transparent',
             keep ? bg ? 'max-lg:bg-transparent' : 'max-lg:bg-grey-1 max-lg:bg-opacity-40' : ''
         )}>
@@ -348,8 +348,8 @@ export function PlayerAttribute({ attrib='', value, bg=false, keep=false, color=
 
 PlayerAttribute.displayName = 'Player.Attribute'
 
-export function PlayerImage({ URI, className }) {
-    if (URI){
+export function PlayerImage({ URI='', className }) {
+    if (URI !== ''){
         return (
             <div className={clsx(
                 'bg-grey-1 bg-opacity-40 rounded w-full h-fit mx-auto',
