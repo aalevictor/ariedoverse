@@ -40,7 +40,7 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
             <div className="h-[550px] w-full max-lg:h-[250px]">
                 <TwitchPlayer className="" width='100%' height='100%' channel={channel} />
             </div>
-            { !live ? (
+            { live ? (
                 <TwitchChat className="max-lg:w-full h-[550px]" channel={channel} />
             ) : ('')}
         </div>
