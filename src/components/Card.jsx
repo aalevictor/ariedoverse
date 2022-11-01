@@ -12,8 +12,8 @@ const linkDefault = '/'
 
 function Card({ icon=iconDefault, title=titleDefault, text=textDefault, footer=footerDefault, link=linkDefault }){
     return (<>
-        <a href={link} className="bg-offwhite bg-opacity-10 hover:bg-opacity-20 cursor-pointer text-offwhite p-4 px-4 w-[300px] rounded-lg flex flex-col flex-grow justify-between gap-8">
-            <div className="flex flex-col gap-2">
+        <a href={link} className="bg-offwhite bg-opacity-10 hover:bg-opacity-20 cursor-pointer text-offwhite p-4 px-4 w-[300px] rounded-lg flex flex-col flex-grow justify-between gap-10">
+            <div className="flex flex-col gap-3">
                 <div className="justify-center flex">{icon}</div>
                 <div className="text-lg text-center font-bold">{title}</div>
                 <div className="text-xs text-center">{text}</div>

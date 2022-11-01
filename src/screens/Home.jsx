@@ -15,15 +15,15 @@ const Home = () =>{
           <Card
             icon={<SoccerBall size={50} weight="duotone" />}
             title="BAL"
-            text="Be a Legend (Seja uma lenda) é um RPG onde você será o mais novo jogador dentro da base de dados do Football Manager, vai poder escolher sua posição, principais características e até sua nacionalidade pra levá-lo a glória (ou fracasso)!"
+            text="Be A Legend (Seja uma lenda) é um RPG onde você será o mais novo jogador dentro da base de dados do Football Manager, vai poder escolher sua posição, principais características e até sua nacionalidade pra levá-lo a glória (ou fracasso)!"
             footer="Entre pro time"
             link="/bal"
           />
           <Card
             icon={<Suitcase size={50} weight="duotone" />}
             title="BAP"
-            text="Be a President (Seja o presidente) é uma variante do BAL, mas aqui você vai entrar pro mundo dos negócios, administrar seu time contratando os melhores jogadores, jovens promessas, treinadores e até melhorando suas instalações. Mas lembre-se: Amigos, amigos..."
-            footer="... Negócios a parte"
+            text="O Be A President (Seja um presidente) é o maior experimento social de Football Manager do mundo, ou não! Basicamente um RPG de Futebol, onde cada jogador interpreta o presidente de equipes das cinco grandes ligas européias. Eles podem influenciar nos aspectos financeiros e de comissão da equipe, entretanto, não podem mexer na tática. O resultado? Criação de conteúdo e caos."
+            footer="Junte-se ao Caos"
             link="/bap"
           />
         </Content>

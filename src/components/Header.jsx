@@ -17,8 +17,8 @@ export function HeaderRoot({ children }) {
                 </Avatar.Root>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
-                <DropdownMenu.Content className='bg-blue-3 py-2 w-full min-w-[150px] z-50 rounded text-offwhite uppercase text-center px-2 border border-offwhite mt-[-1px]' sideOffset={5}>
-                    <DropdownMenu.Arrow className="fill-offwhite text-offwhite"></DropdownMenu.Arrow>
+                <DropdownMenu.Arrow></DropdownMenu.Arrow>
+                <DropdownMenu.Content className='bg-blue-3 w-full py-2 z-50 rounded text-offwhite uppercase text-center px-3 mt-8'>
                     <DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>login</DropdownMenu.Item>
                     <DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>conta</DropdownMenu.Item>
                 </DropdownMenu.Content>
@@ -30,7 +30,7 @@ export function HeaderRoot({ children }) {
     return (
         <>
             <nav className="sticky flex flex-wrap items-center justify-between px-2 py-1 bg-blue-3 top-0 z-40">
-                <div className="container lg:px-8 mx-auto flex flex-wrap items-center justify-between max-h-[64px]">
+                <div className="container lg:px-8 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex items-center justify-between lg:w-auto lg:static lg:block lg:justify-start py-4 px-3 gap-1">
                         <button
                             className="text-offwhite cursor-pointer leading-none border border-solid border-transparent rounded block lg:hidden"
@@ -46,8 +46,12 @@ export function HeaderRoot({ children }) {
                             {user}
                         </div>
                     </div>
-                    <div className="lg:flex items-center max-lg:w-full gap-[3px]">
-                        <ul className="flex flex-col py-2 px-2 lg:flex-row lg:ml-auto w-full max-lg:hidden">
+                    <div
+                        className={
+                            "lg:flex items-center max-lg:w-full gap-[3px]" + (navbarOpen ? " flex" : " hidden")
+                        }
+                    >
+                        <ul className="flex flex-col py-2 px-2 lg:flex-row lg:ml-auto w-full">
                             { children }
                         </ul>
                         <div className="max-lg:hidden">{user}</div>
