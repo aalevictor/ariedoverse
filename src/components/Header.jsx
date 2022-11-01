@@ -5,20 +5,19 @@ import logo from '../assets/logo2.png';
 import clsx from "clsx";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import * as Avatar from '@radix-ui/react-avatar';
-import avatar from '../assets/avatar.jpg';
 
 export function HeaderRoot({ children }) {
 	const user = (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger className="my-auto align-middle">
                 <Avatar.Root>
-                    <Avatar.Image src={avatar} className="w-8 rounded-[16px] outline-none" alt='avatar' />
+                    <Avatar.Image src='' className="w-8 rounded-[16px] outline-none" alt='avatar' />
                     <Avatar.Fallback delayMs={600} className="w-8 object-cover rounded-[16px] outline-none text-offwhite"><UserCircle size={32} /></Avatar.Fallback>
                 </Avatar.Root>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
-                <DropdownMenu.Arrow></DropdownMenu.Arrow>
-                <DropdownMenu.Content className='bg-blue-3 w-full py-2 z-50 rounded text-offwhite uppercase text-center px-3 mt-8'>
+                <DropdownMenu.Content className='bg-blue-3 py-2 z-50 rounded text-offwhite uppercase text-center px-3 border border-offwhite mt-[-1px] w-full min-w-[128px]'>
+                    <DropdownMenu.Arrow className="fill-offwhite"></DropdownMenu.Arrow>
                     <DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>login</DropdownMenu.Item>
                     <DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>conta</DropdownMenu.Item>
                 </DropdownMenu.Content>
