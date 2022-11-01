@@ -267,9 +267,10 @@ export function PlayerOthers({ player }) {
                 <Collapsible.Content className='flex flex-col gap-1 w-full max-lg:mt-1' >
                     <PlayerAttribute value={player.height + ' cm'} attrib='Altura' bg />
                     <PlayerAttribute value={player.weight + ' kg'} attrib='Peso'  />
-                    <PlayerAttribute value={player.preferredFoot} attrib='Pé preferido' bg />
+                    <PlayerAttribute value={player.rightFoot} attrib='Pé direito' bg />
+                    <PlayerAttribute value={player.leftFoot} attrib='Pé esquerdo' />
                     <Collapsible.Root className={clsx(
-                        'flex flex-col gap-[3px] w-full max-lg:mt-6 ',
+                        'flex flex-col gap-[3px] w-full mt-[41px] max-lg:mt-6 ',
                         openPosition ? 'max-lg:mb-6' : 'max-lg:mb-[-3px]'
                     )} open={openPosition} onOpenChange={setOpenPosition}>
                         <Collapsible.Trigger className='items-center justify-between flex font-semibold text-md text-offwhite px-2 py-1 max-lg:max-w-[500px] max-lg:w-full max-lg:mx-auto lg:text-left rounded hover:bg-grey-1 hover:bg-opacity-40'>

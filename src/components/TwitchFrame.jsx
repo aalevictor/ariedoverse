@@ -5,7 +5,7 @@ function TwitchFrame({ url = 'https://api.twitch.tv/helix/streams', userID = '46
     const [live, setLive] = useState(false)
     const [channel, setChannel] = useState('sirariedo')
 
-    const token = 'yhafdkd42458shmhehxj9gei4502lk'
+    const token = '9ankh9otrnvleiiaxi3rvp4b9qxmbz'
 
     useEffect(() => {
         const URI = url + (userID !== '' ? `?user_id=${userID}` : '')
