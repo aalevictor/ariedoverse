@@ -13,7 +13,7 @@ TextInputRoot.displayName = 'TextInput.Root'
 
 function TextInputIcon(props) {
     return (
-        <Slot className='w-5 h-5 text-blue-2'>
+        <Slot className='w-5 h-5 text-blue-2 max-sm:hidden'>
             {props.children}
         </Slot>
     )
@@ -24,7 +24,7 @@ TextInputIcon.displayName = 'TextInput.Icon'
 function TextInputInput(props)  {
     return (
         <input 
-            className='bg-transparent flex-1 text-blue-2 text-xs placeholder:text-grey-1 outline-none'
+            className='bg-transparent flex-1 text-blue-2 text-xs placeholder:text-grey-1 outline-none md:w-[250px]'
             {...props}
         />
     )

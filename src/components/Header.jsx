@@ -5,8 +5,79 @@ import logo from '../assets/logo2.png';
 import clsx from "clsx";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import * as Avatar from '@radix-ui/react-avatar';
+import axios from 'axios';
+import { useEffect } from "react";
 
 export function HeaderRoot({ children }) {
+    const baseURL = 'https://balp-api.herokuapp.com/'
+
+    const [twitch,  setTwitch]  = useState('')
+    const [email,   setEmail]   = useState('')
+    const [login,   setLogin]   = useState(false)
+
+    useEffect(() => {
+        var url = `${baseURL}refresh`
+        try {
+            const refresh = sessionStorage.getItem('refresh')
+            if (refresh){
+                refreshToken(url, refresh)
+            }
+        } catch {}
+    }, )
+
+    function handleLogout() {
+        sessionStorage.clear()
+        setEmail('')
+        setTwitch('')
+        setLogin(false)
+        window.location.reload()
+    }
+
+    function refreshToken(url, refresh) {
+        axios({
+            method: "post",
+            url: url,
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: {
+                refresh: refresh
+            }
+        })
+        .then((response) => {
+            if (response.status === 200){
+                sessionStorage.setItem('access', response.data.access)
+                getUserData(response.data.access)
+            } else {
+                handleLogout()
+                window.location.href = "/login"
+            }
+        });
+    }
+
+    function getUserData(access) {
+        var url = `${baseURL}check`
+        axios({
+            method: "get",
+            url: url,
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access
+            }
+        })
+        .then((response) => {
+            if (response.status === 200){
+                setEmail(response.data.email)
+                setTwitch(response.data.twitch)
+                console.log(email)
+                setLogin(true)
+            }
+        });
+
+    }
+
 	const user = (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger className="my-auto align-middle">
@@ -18,8 +89,19 @@ export function HeaderRoot({ children }) {
             <DropdownMenu.Portal>
                 <DropdownMenu.Content className='bg-blue-3 py-2 z-50 rounded text-offwhite uppercase text-center px-3 border border-offwhite mt-[-1px] w-full min-w-[128px]'>
                     <DropdownMenu.Arrow className="fill-offwhite"></DropdownMenu.Arrow>
-                    <DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>login</DropdownMenu.Item>
-                    <DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>conta</DropdownMenu.Item>
+                    {
+                        login ? (
+                            <>
+                                <a href='/account'><DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>{twitch}</DropdownMenu.Item></a>
+                                <div onClick={handleLogout}><DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>sair</DropdownMenu.Item></div>
+                            </>
+                            ) : (
+                            <>
+                                <a href='/login'><DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>login</DropdownMenu.Item></a>
+                                <a href='/register'><DropdownMenu.Item className='w-full py-2 px-1 hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none rounded cursor-pointer'>cadastro</DropdownMenu.Item></a>
+                            </>
+                        )
+                    }
                 </DropdownMenu.Content>
             </DropdownMenu.Portal>
         </DropdownMenu.Root>
