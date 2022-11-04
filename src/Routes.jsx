@@ -7,11 +7,13 @@ import { Routes as BAL } from './screens/BAL/Routes';
 import { Routes as BAP } from './screens/BAP/Routes';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
+import NotFound from "./screens/NotFound";
 
 const Routes = () => {
     return(
         <BrowserRouter>
             <Routers>
+                <Route element={<NotFound />} path="*" />
                 <Route element={<Home />} exact path="/" />
                 <Route element={<Login />} exact path="/login" />
                 <Route element={<Register />} exact path="/register" />

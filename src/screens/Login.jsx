@@ -90,14 +90,14 @@ const Login = () =>{
             <span className=''>Login</span>
             <TextInput.Root>
               <TextInput.Icon children={<TwitchLogo />} />
-              <TextInput.Input placeholder="Usuário da twitch" name="login" />
+              <TextInput.Input placeholder="Usuário da twitch" name="login" required />
             </TextInput.Root>
           </div>
           <div className='flex flex-col text-offwhite gap-2 h-fit'>
             <span className=''>Senha</span>
             <TextInput.Root>
               <TextInput.Icon children={<Key />} />
-              <TextInput.Input type="password" placeholder="Senha" name="password" />
+              <TextInput.Input type="password" placeholder="Senha" name="password" required />
             </TextInput.Root>
           </div>
           <Button className="mt-6 w-full" type="submit">Entrar</Button>
