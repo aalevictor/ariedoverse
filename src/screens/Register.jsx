@@ -1,11 +1,13 @@
-import { DiscordLogo, EnvelopeSimple, Key, TwitchLogo, User } from 'phosphor-react';
-import React from 'react';
+import { Check, DiscordLogo, EnvelopeSimple, Key, TwitchLogo, User } from 'phosphor-react';
+import React, { useEffect } from 'react';
 import { Body } from '../components/Body';
 import { Form } from '../components/Form';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
+import Card from '../components/Card';
 import { useState } from 'react';
 import axios from 'axios';
+import Alert from '../components/Alert';
 
 const Register = () =>{
   const [errorTwitch, setErrorTwitch] = useState('')
@@ -14,7 +16,11 @@ const Register = () =>{
   const [errorDiscord, setErrorDiscord] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
   const [errorPassword2, setErrorPassword2] = useState('')
+  const [registered, setRegistered] = useState(false)
+  const [email, setEmail] = useState('')
+  const [alerts, setAlerts] = useState('')
   const baseURL = 'https://balp-api.herokuapp.com/'
+  // const baseURL = 'http://127.0.0.1:8000/'
 
   function searchValue(key, value){
     const url = `${baseURL}verify?${key}=${value}`
@@ -44,6 +50,13 @@ const Register = () =>{
     });
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      registered ? window.location = '/login' : console.log()
+    }, 10000)
+  }, [ registered ])
+  
+
   function verifyForm(){
     // var stat = errorTwitch === '' & errorName === '' & errorEmail === '' & errorDiscord === '' & errorPassword === '' & errorPassword2 === ''
     return errorTwitch === '' & errorName === '' & errorEmail === '' & errorDiscord === '' & errorPassword === '' & errorPassword2 === ''
@@ -55,9 +68,11 @@ const Register = () =>{
     if (verifyForm()){
       const twitch = event.target.twitch.value;
       const name = event.target.name.value;
-      const email = event.target.email.value;
+      setEmail(event.target.email.value);
       const discord = event.target.discord.value;
       const password =  event.target.password.value;
+
+      setAlerts('')
 
       axios({
         method: "post",
@@ -74,7 +89,13 @@ const Register = () =>{
           discord
         },
       }).then((response) => {
-        console.log(response)
+        setRegistered(true)
+      }).catch((response) => {
+        setAlerts(
+          <Alert
+            title='Erro ao cadastrar'
+          >Verifique todos os campos e tente novamente.</Alert>
+        )
       })
     }
   }
@@ -158,61 +179,75 @@ const Register = () =>{
   }
 
   return (
-    <Body className="flex items-center justify-center max-sm:bg-grey-1">
-      <Form.Root onSubmit={handleSubmit}>
-        <Form.Content className='flex flex-col text-offwhite w-fit gap-2'>
-          <div className='flex flex-col text-offwhite gap-2 h-fit'>
-            <span className=''>Login</span>
-            <TextInput.Root>
-              <TextInput.Icon children={<TwitchLogo />} />
-              <TextInput.Input placeholder="Usuário da twitch" name="twitch" onBlur={handleTwitch} required />
-            </TextInput.Root>
-            <small className='text-bad mt-[-8px]'>{errorTwitch}</small>
-          </div>
-          <div className='flex flex-col text-offwhite gap-2 h-fit'>
-            <span className=''>Nome</span>
-            <TextInput.Root>
-              <TextInput.Icon children={<User />} />
-              <TextInput.Input placeholder="Nome" name="name" onBlur={handleName} required />
-            </TextInput.Root>
-            <small className='text-bad mt-[-8px]'>{errorName}</small>
-          </div>
-          <div className='flex flex-col text-offwhite gap-2 h-fit'>
-            <span className=''>E-mail</span>
-            <TextInput.Root>
-              <TextInput.Icon children={<EnvelopeSimple />} />
-              <TextInput.Input placeholder="E-mail" name="email" onBlur={handleEmail} required />
-            </TextInput.Root>
-            <small className='text-bad mt-[-8px]'>{errorEmail}</small>
-          </div>
-          <div className='flex flex-col text-offwhite gap-2 h-fit'>
-            <span className=''>Discord</span>
-            <TextInput.Root>
-              <TextInput.Icon children={<DiscordLogo />} />
-              <TextInput.Input placeholder="Usuário#0000" name="discord" onBlur={handleDiscord} required />
-            </TextInput.Root>
-            <small className='text-bad mt-[-8px]'>{errorDiscord}</small>
-          </div>
-          <div className='flex flex-col text-offwhite gap-2 h-fit'>
-            <span className=''>Senha</span>
-            <TextInput.Root>
-              <TextInput.Icon children={<Key />} />
-              <TextInput.Input type="password" placeholder="Senha" id="password" name="password" onBlur={handlePassword} required />
-            </TextInput.Root>
-            <small className='text-bad mt-[-8px]'>{errorPassword}</small>
-          </div>
-          <div className='flex flex-col text-offwhite gap-2 h-fit'>
-            <span className=''>Senha</span>
-            <TextInput.Root>
-              <TextInput.Icon children={<Key weight='duotone' />} />
-              <TextInput.Input type="password" placeholder="Confirmar senha" id="password2" name="password2" onBlur={handlePassword2} required />
-            </TextInput.Root>
-            <small className='text-bad mt-[-8px]'>{errorPassword2}</small>
-          </div>
-          <Button className="mt-6 w-full" type="submit">Cadastrar</Button>
-        </Form.Content>
-      </Form.Root>
-    </Body>
+    <>
+      {alerts}
+      <Body className="flex items-center justify-center max-sm:bg-grey-1">
+        {registered ?
+          <Card
+            icon={<Check size={50} weight="duotone" />}
+            title="Cadastrado com sucesso"
+            text={`Verifique a caixa de entrada do seu email ${email} para confirmar seu cadastro. (Você será redirecionado para a tela de login em 10 segundos...)`}
+            footer="Ir para o login"
+            link="/login"
+            grow={false}
+          />
+        :
+          <Form.Root onSubmit={handleSubmit} id="register">
+            <Form.Content className='flex flex-col text-offwhite w-fit gap-2'>
+              <div className='flex flex-col text-offwhite gap-2 h-fit'>
+                <span className=''>Login</span>
+                <TextInput.Root>
+                  <TextInput.Icon children={<TwitchLogo />} />
+                  <TextInput.Input placeholder="Usuário da twitch" name="twitch" onBlur={handleTwitch} required />
+                </TextInput.Root>
+                <small className='text-bad mt-[-8px]'>{errorTwitch}</small>
+              </div>
+              <div className='flex flex-col text-offwhite gap-2 h-fit'>
+                <span className=''>Nome</span>
+                <TextInput.Root>
+                  <TextInput.Icon children={<User />} />
+                  <TextInput.Input placeholder="Nome" name="name" onBlur={handleName} required />
+                </TextInput.Root>
+                <small className='text-bad mt-[-8px]'>{errorName}</small>
+              </div>
+              <div className='flex flex-col text-offwhite gap-2 h-fit'>
+                <span className=''>E-mail</span>
+                <TextInput.Root>
+                  <TextInput.Icon children={<EnvelopeSimple />} />
+                  <TextInput.Input placeholder="E-mail" name="email" onBlur={handleEmail} required />
+                </TextInput.Root>
+                <small className='text-bad mt-[-8px]'>{errorEmail}</small>
+              </div>
+              <div className='flex flex-col text-offwhite gap-2 h-fit'>
+                <span className=''>Discord</span>
+                <TextInput.Root>
+                  <TextInput.Icon children={<DiscordLogo />} />
+                  <TextInput.Input placeholder="Usuário#0000" name="discord" onBlur={handleDiscord} required />
+                </TextInput.Root>
+                <small className='text-bad mt-[-8px]'>{errorDiscord}</small>
+              </div>
+              <div className='flex flex-col text-offwhite gap-2 h-fit'>
+                <span className=''>Senha</span>
+                <TextInput.Root>
+                  <TextInput.Icon children={<Key />} />
+                  <TextInput.Input type="password" placeholder="Senha" id="password" name="password" onBlur={handlePassword} required />
+                </TextInput.Root>
+                <small className='text-bad mt-[-8px]'>{errorPassword}</small>
+              </div>
+              <div className='flex flex-col text-offwhite gap-2 h-fit'>
+                <span className=''>Senha</span>
+                <TextInput.Root>
+                  <TextInput.Icon children={<Key weight='duotone' />} />
+                  <TextInput.Input type="password" placeholder="Confirmar senha" id="password2" name="password2" onBlur={handlePassword2} required />
+                </TextInput.Root>
+                <small className='text-bad mt-[-8px]'>{errorPassword2}</small>
+              </div>
+              <Button className="mt-6 w-full" type="submit">Cadastrar</Button>
+            </Form.Content>
+          </Form.Root>}
+      </Body>
+    </>
+    
   )
 }
 

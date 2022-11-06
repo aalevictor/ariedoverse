@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 import logo from '../assets/logo2.png'
 
-export function FormRoot({ children, onSubmit }) {
+export function FormRoot({ children, onSubmit, id }) {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} id={id}>
             <div className='bg-grey-1 rounded-lg flex flex-col justify-center items-center p-8 max-sm:p-0 gap-2 max-sm:gap-0 h-fit w-fit'>
                 { children }
             </div>

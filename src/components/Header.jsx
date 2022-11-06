@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 export function HeaderRoot({ children }) {
     const baseURL = 'https://balp-api.herokuapp.com/'
+    // const baseURL = 'http://127.0.0.1:8000/'
 
     const [twitch,  setTwitch]  = useState('')
     const [email,   setEmail]   = useState('')
@@ -107,7 +108,7 @@ export function HeaderRoot({ children }) {
         </DropdownMenu.Root>
 	)
 
-    const [navbarOpen, setNavbarOpen] = useState(false);
+    const [navbarOpen, setNavbarOpen] = useState(true);
     return (
         <>
             <nav className="sticky flex flex-wrap items-center justify-between px-2 py-1 bg-blue-3 top-0 z-40">
@@ -116,7 +117,10 @@ export function HeaderRoot({ children }) {
                         <button
                             className="text-offwhite cursor-pointer leading-none border border-solid border-transparent rounded block lg:hidden"
                             type="button"
-                            onClick={() => setNavbarOpen(!navbarOpen)}
+                            onClick={() => {
+                                setNavbarOpen(!navbarOpen)
+                                console.log(navbarOpen)
+                            }}
                         >
                             <List size={30} />
                         </button>
@@ -129,7 +133,7 @@ export function HeaderRoot({ children }) {
                     </div>
                     <div
                         className={
-                            "lg:flex items-center max-lg:w-full gap-[3px]" + (navbarOpen ? " flex" : " hidden")
+                            "lg:flex items-center max-lg:hidden gap-[3px]"
                         }
                     >
                         <ul className="flex flex-col py-2 px-2 lg:flex-row lg:ml-auto w-full">
@@ -139,6 +143,7 @@ export function HeaderRoot({ children }) {
                     </div>
                 </div>
             </nav>
+            <HeaderSidebar show={navbarOpen}>{children}</HeaderSidebar>
         </>
     )
 }
@@ -154,7 +159,7 @@ export function HeaderItem({ children, link='#', title, className='' }) {
         )}>
             <Comp
                 className={clsx(
-                    "py-2 flex items-center font-bold leading-snug rounded uppercase text-offwhite hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none focus:ring-2 ring-offwhite lg:p-1",
+                    "py-2 flex items-center font-bold leading-snug rounded uppercase text-offwhite hover:bg-blue-1 hover:bg-opacity-20 transition-opacity outline-none focus:ring-2 ring-offwhite lg:p-1 max-lg:pr-16",
                     className
                 )}
                 href={link}
@@ -170,8 +175,24 @@ export function HeaderItem({ children, link='#', title, className='' }) {
 
 HeaderItem.displayName = 'Header.Item'
 
+export function HeaderSidebar({show=false, children}) {
+    const hidden = show ? ' hidden' : ' flex'
+    return (
+        <div className={clsx(hidden)}>
+            <div className="top-16 left-0 w-fit bg-blue-3 text-offwhite fixed h-full lg:hidden z-50">
+                <ul className="flex flex-col py-2 px-2 w-full">
+                    {children}
+                </ul>
+            </div>
+        </div>
+    )
+}
+
+HeaderSidebar.displayName = 'Header.Sidebar'
+
 export const Header = {
     Root: HeaderRoot,
     Item: HeaderItem,
+    Sidebar: HeaderSidebar
 }
 
