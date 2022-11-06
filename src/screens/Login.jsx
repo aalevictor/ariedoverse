@@ -7,11 +7,13 @@ import { Button } from '../components/Button';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Alert from '../components/Alert';
+import { useSearchParams } from 'react-router-dom';
 
 const Login = () =>{
   const baseURL = 'https://balp-api.herokuapp.com/'
   // const baseURL = 'http://127.0.0.1:8000/'
   const [alerts, setAlerts] = useState(<></>)
+  const [searchParams, ] = useSearchParams();
 
   const handleSubmit = event => {
     console.log('handleSubmit ran');
@@ -31,7 +33,18 @@ const Login = () =>{
         refreshToken(url, refresh)
       }     
     } catch {}
-  }, [])
+
+    if (searchParams.get('activate')){
+      if(searchParams.get('activate') === 'true'){
+        setAlerts(
+          <Alert
+            title='Sucesso!'
+            type='great'
+          >Sua conta foi ativada.</Alert>
+        )
+      }
+    }
+  }, [ searchParams ])
 
   function refreshToken(url, refresh) {
     axios({
