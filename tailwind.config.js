@@ -35,6 +35,7 @@ module.exports = {
       regular: '#FFB744',
       good: '#2196F3',
       great: '#0AFF67',
+      success: '#0ba00b'
     },
   }
 }

@@ -39,7 +39,7 @@ const Login = () =>{
         setAlerts(
           <Alert
             title='Sucesso!'
-            type='great'
+            type='success'
           >Sua conta foi ativada.</Alert>
         )
       }
