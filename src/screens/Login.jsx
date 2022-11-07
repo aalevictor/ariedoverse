@@ -92,17 +92,18 @@ const Login = () =>{
         window.location.href = "/"
       }
     }).catch((response) => {
+      console.log(response)
       if (response.response.status === 401)
           setAlerts(
             <Alert
               title='Erro ao logar'
-            >Login e/ou senha incorreto(s)</Alert>
+            >{response.response.data}</Alert>
           )
       else
           setAlerts(
             <Alert
               title='Erro inesperado'
-            >Tente novamente mais tarde</Alert>
+            >{response.response.data}</Alert>
           )
           
     });
